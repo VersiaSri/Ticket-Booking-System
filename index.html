@@ -1,0 +1,1394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Ticket Booker</title>
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
+    <style>
+       * {
+        margin: 0;
+        padding: 0;
+        font-family: "Mulish", sans-serif;
+    }
+
+    .fnav {
+        display: flex;
+        justify-content: space-around;
+        padding: 5px;
+        color: white;
+        background-color: rgb(42, 42, 68);
+    }
+
+    .fnav .left {
+        display: flex;
+        align-items: center;
+    }
+
+    .fnav .right {
+        display: flex;
+        align-items: center;
+        margin-right: 15px;
+    }
+
+    .left img {
+        width: 18%;
+        height: 95%;
+    }
+
+    .search-container {
+        position: relative;
+        align-items: center;
+        width: 350px;
+        margin: 0 20px;
+        margin-right: 450px;
+    }
+
+    .left input {
+        width: 100%;
+        height: 35px;
+        border: none;
+        outline: none;
+        padding-left: 35px;
+        font-size: 16px;
+        border-radius: 2px;
+    }
+
+    .left .search-icon {
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 18px;
+        color: gray;
+    }
+
+    .right button {
+        margin: 0 25px;
+        width: 80px;
+        height: 27px;
+        border: none;
+        border-radius: 2px;
+        background-color: rgb(251, 59, 91);
+        color: white;
+        font-size: 15px;
+    }
+
+    .right i {
+        font-size: 30px;
+    }
+
+    .sec-nav {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 9px;
+        background-color: rgb(26, 26, 48);
+    }
+
+    .sec-nav p {
+        flex: 1;
+        text-align: center;
+        cursor: pointer;
+        color: white;  /* Default color for category text */
+        transition: color 0.3s ease;
+    }
+
+    .sec-nav p:hover {
+        color: rgb(245, 70, 99); /* Color when hovered */
+        font-weight: 600;
+    }
+
+    .sec-nav a {
+        text-decoration: none;
+        color: inherit;  /* Inherits color from parent */
+    }
+
+    /* Smooth Scroll */
+    html {
+        scroll-behavior: smooth;
+    }
+
+    /* Section Styling */
+    .section {
+        padding: 20px;
+    }
+
+    .recommended-movies h2,
+    .recommended-events h2,
+    .recommended-sports h2,
+    .offers h2,
+    .contact h2 {
+        text-align: left;
+        margin-bottom: 20px;
+        font-size: 24px;
+        color: rgb(42, 42, 68);
+    }
+
+        .location-select {
+            background-color: white;
+            color: black;
+            border: none;
+            font-size: 16px;
+            padding: 6px 25px;
+            border-radius: 5px;
+        }
+
+        .location-icon {
+            font-size: 30px;
+            color: rgb(245, 70, 99);
+            margin-right: 5px;
+        }
+
+        .recommended-movies {
+            padding: 20px;
+        }
+
+        .recommended-movies h2 {
+            text-align: left;
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: rgb(42, 42, 68);
+        }
+
+        .movie-cards {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding-bottom: 10px;
+        }
+
+        .movie-card {
+            flex: 0 0 auto;
+            width: 200px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .movie-card:hover {
+            transform: scale(1.05);
+        }
+
+        .movie-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .movie-card h3 {
+            text-align: center;
+            font-size: 18px;
+            margin: 10px 0;
+            color: rgb(42, 42, 68);
+        }
+
+        /* Scrollbar Styling */
+       /* Scrollbar Styling */
+.movie-cards::-webkit-scrollbar {
+    height: 10px;
+}
+
+
+.recommended-events {
+    padding: 20px;
+}
+
+.recommended-events h2 {
+    text-align: left;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: rgb(42, 42, 68);
+}
+
+.event-cards {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding-bottom: 10px;
+    padding-top: 20px; /* Added padding to create space before the event cards */
+}
+
+.event-card {
+    flex: 0 0 auto;
+    width: 200px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.event-card:hover {
+    transform: scale(1.05);
+}
+
+.event-card img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.event-card h3 {
+    text-align: center;
+    font-size: 18px;
+    margin: 10px 0;
+    color: rgb(42, 42, 68);
+}
+
+/* Scrollbar Styling */
+.event-cards::-webkit-scrollbar {
+    height: 10px;
+}
+.recommended-sports {
+    padding: 20px;
+}
+
+.recommended-sports h2 {
+    text-align: left;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: rgb(42, 42, 68);
+}
+
+.sports-cards {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding-bottom: 10px;
+    padding-top: 20px; /* Added padding to create space before the sport cards */
+}
+
+.sport-card {
+    flex: 0 0 auto;
+    width: 200px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.sport-card:hover {
+    transform: scale(1.05);
+}
+
+.sport-card img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.sport-card h3 {
+    text-align: center;
+    font-size: 18px;
+    margin: 10px 0;
+    color: rgb(42, 42, 68);
+}
+
+/* Scrollbar Styling */
+.sports-cards::-webkit-scrollbar {
+    height: 10px;
+}
+/* Contact Section Styling */
+/* Contact Section Styling */
+.contact {
+    padding: 40px 20px;
+    background-color: rgb(30, 30, 50); /* Darker background */
+    color: rgb(200, 200, 200); /* Lighter text for better contrast */
+}
+
+.contact h2 {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: rgb(255, 255, 255); /* Lighter color for the header */
+}
+
+.contact-info {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 30px;
+}
+
+.contact-item {
+    width: 30%;
+}
+
+.contact-item h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: rgb(255, 255, 255); /* Lighter color for the headers */
+}
+
+.contact-item p {
+    font-size: 18px;
+    color: rgb(180, 180, 180); /* Slightly lighter text for better readability */
+}
+
+.contact-form {
+    text-align: center;
+}
+
+.contact-form h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: rgb(255, 255, 255); /* Lighter color for the form header */
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: rgb(50, 50, 70); /* Darker input fields */
+    color: rgb(255, 255, 255); /* Lighter text for inputs */
+}
+
+.contact-form button {
+    padding: 10px 20px;
+    border: none;
+    background-color: rgb(251, 59, 91); /* Retain the button color */
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.contact-form button:hover {
+    background-color: rgb(245, 70, 99);
+}
+
+/* Offers Section Styling */
+.offers {
+    padding: 40px 20px;
+    background-color: #f9f9f9; /* Light background for the section */
+    color: #333; /* Dark text for contrast */
+}
+
+.offers h2 {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 30px;
+    color: #333; /* Dark color for the heading */
+}
+
+.offer-cards {
+    display: flex;
+    gap: 20px;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.offer-card {
+    width: 220px;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    opacity: 0;
+    transform: translateX(-100%);
+    animation: slideIn 5s forwards;
+    animation-iteration-count: infinite; /* Repeats the animation infinitely */
+    transition: transform 0.3s ease-in-out;
+    color: #ffffff; /* Light text color for readability */
+    background: linear-gradient(135deg, #6e7cfd, #9a7bff); /* Gradient background */
+}
+
+.offer-card h3 {
+    margin: 15px 0;
+    font-size: 18px;
+    color: #fff; /* White color for titles */
+}
+
+.offer-card p {
+    font-size: 14px;
+    color: #f7f7f7; /* Slightly lighter color for descriptions */
+}
+
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+    50% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}
+
+/* Responsive for mobile view */
+@media (max-width: 768px) {
+    .offer-cards {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .offer-card {
+        width: 80%;
+        margin-bottom: 20px;
+    }
+}
+        /* Style for the notification bar */
+        #notificationBar {
+            display: none; /* Hidden by default */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 18px;
+            z-index: 1000;
+        }
+        
+.selected-card-details {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Transparent background */
+    z-index: 9999;
+    overflow: auto;
+    padding: 20px;
+}
+
+.selected-card-details .details {
+    display: flex;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 900px; /* Limit the width of the content */
+    width: 80%; /* Adjust width as needed */
+}
+
+.selected-card-details .details .movie-image {
+    flex-shrink: 0;
+    margin-right: 20px; /* Space between the image and details */
+    object-fit: contain;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.selected-card-details .details img {
+    width: 250px; /* Set the image size */
+    height: auto;
+}
+
+.selected-card-details .details .movie-info {
+    flex-grow: 1;
+}
+
+.selected-card-details .details .movie-info h3 {
+    margin-bottom: 10px;
+}
+
+.selected-card-details .details .movie-info p {
+    margin-bottom: 20px;
+}
+
+.selected-card-details .details form {
+    display: flex;
+    flex-direction: column;
+}
+
+.selected-card-details .details form label,
+.selected-card-details .details form input,
+.selected-card-details .details form button {
+    margin-bottom: 10px;
+}
+
+.selected-card-details .details form input,
+.selected-card-details .details form button {
+    padding: 10px;
+    font-size: 14px;
+}
+.selected-card-details .details .event-image {
+    flex-shrink: 0;
+    margin-right: 20px; /* Space between the image and details */
+    object-fit: contain;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.selected-card-details .details .event-info {
+    flex-grow: 1;
+}
+
+.selected-card-details .details .event-info h3 {
+    margin-bottom: 10px;
+}
+
+.selected-card-details .details .event-info p {
+    margin-bottom: 20px;
+}
+
+.selected-card-details .details .sport-image {
+    flex-shrink: 0;
+    margin-right: 20px; /* Space between the image and details */
+    object-fit: contain;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.selected-card-details .details .sport-info {
+    flex-grow: 1;
+}
+
+.selected-card-details .details .sport-info h3 {
+    margin-bottom: 10px;
+}
+
+.selected-card-details .details .sport-info p {
+    margin-bottom: 20px;
+}
+
+/* Modal styles */
+/* Modal styles */
+.sign-in-modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/opacity */
+    padding-top: 100px;
+}
+
+.modal-content {
+    background-color: white;
+    margin: auto;
+    padding: 40px;
+    border: 1px solid #888;
+    width: 50%; /* Adjusted to make it bigger */
+    text-align: center;
+    border-radius: 10px;
+}
+
+button {
+    padding: 12px 24px;  /* Adjust padding for a more balanced look */
+    margin: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    white-space: nowrap;  /* Prevent text wrapping */
+    text-align: center;  /* Ensure text is centered */
+    display: inline-flex;  /* Use inline-flex to center the text */
+    justify-content: center;  /* Center the text horizontally */
+    align-items: center;  /* Center the text vertically */
+    border-radius: 5px;  /* Rounded corners */
+    width: 150px;  /* Fixed width to prevent elongation */
+    box-sizing: border-box;  /* Include padding and border in the width calculation */
+    overflow: hidden;  /* Prevent overflow */
+}
+
+button[type="button"] {
+    background-color: #f44336;  /* Red */
+    color: white;
+    border: none;
+}
+
+button[type="submit"] {
+    background-color: #4CAF50;  /* Green */
+    color: white;
+    border: none;
+}
+
+button:focus {
+    outline: none;  /* Remove focus outline */
+}
+
+button:hover {
+    opacity: 0.9;  /* Slight hover effect */
+}
+
+
+.close {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+/* Form styling */
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+    </style>
+</head>
+<body>
+    <!-- Task Bar -->
+    <nav class="fnav">
+        <div class="left">
+            <img src="D:/ticket-booking-system/img/Screenshot_2025-01-19_081118-removebg-preview.png" alt="MyTicketBooker">
+            <div class="search-container">
+                <input type="text" placeholder="Search for Movies, Events, Plays & More.">
+                <i class="fa-solid fa-search search-icon"></i>
+            </div>
+            <div>
+                <i class="fa-solid fa-location-pin location-icon"></i>
+                <select class="location-select">
+                    <option value="location1">--location--</option>
+                    <option value="location2">Coimbatore</option>
+                    <option value="location3">Chennai</option>
+                    <option value="location4">Madurai</option>
+                </select>
+            </div>
+        </div>
+        <div class="right">
+            <button id="sign-in-btn" onclick="toggleSignIn()">Sign In</button>
+            <i class="fa-solid fa-user"></i>
+        </div>
+    </nav>
+
+    <!-- Category Bar -->
+    <nav class="sec-nav">
+        <p><a href="#movies">Movies</a></p>
+        <p><a href="#events">Events</a></p>
+        <p><a href="#sports">Sports</a></p>
+        <p><a href="#offers">Offer</a></p>
+        <p><a href="#contact">Contact</a></p>
+    </nav>
+<!-- Sign In Modal (Initially hidden) -->
+<div id="sign-in-modal" class="sign-in-modal">
+    <div class="modal-content">
+        <span class="close" onclick="toggleSignIn()">&times;</span>
+        <h2>Sign In</h2>
+        <form onsubmit="handleSignIn(event)">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" placeholder="Enter your username" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" placeholder="Enter your password" required>
+            </div>
+            <button type="submit">Sign In</button>
+            <button type="button" onclick="toggleSignIn()">Cancel</button>
+        </form>
+    </div>
+</div>
+    <section class="recommended-movies" id="movies">
+    <h2>Movies</h2>
+    <div class="movie-cards">
+        <div class="movie-card">
+            <img src="D:/ticket-booking-system/img/movies/Screenshot 2025-01-19 114516.png" alt="Movie 1">
+            <h3>Madha Gaja Raja</h3>
+            <div class="details" style="display:none;">
+                <img src="D:/ticket-booking-system/img/movies/Screenshot 2025-01-19 114516.png" alt="Movie 1">
+                <h3>Madha Gaja Raja</h3>
+                <p>Full description of the movie...</p>
+                <form>
+    <label for="name">Your Name:</label>
+    <input type="text" id="name" required>
+    
+    <label for="email">Your Email:</label>
+    <input type="email" id="email" required placeholder="example@example.com">
+    
+    <label for="seats">Number of Seats:</label>
+    <input type="number" id="seats" min="1" required>
+
+    <label for="phone">Your Phone Number:</label>
+    <input type="tel" id="phone" required placeholder="123-456-7890">
+
+    <label for="card-details">Card Details:</label>
+    <input type="text" id="card-details" required placeholder="Card Number">
+
+    <button type="submit">Book Now</button>
+</form>
+
+            </div>
+        </div>
+
+        <div class="movie-card">
+            <img src="D:/ticket-booking-system/img/movies/Screenshot 2025-01-19 114534.png" alt="Movie 2">
+            <h3>Kadhalikka Neramillai</h3>
+            <div class="details" style="display:none;">
+                <img src="D:/ticket-booking-system/img/movies/Screenshot 2025-01-19 114534.png" alt="Movie 2">
+                <h3>Kadhalikka Neramillai</h3>
+                <p>Full description of the movie...</p>
+                <form>
+                    <label for="name">Your Name:</label>
+                    <input type="text" id="name" required>
+                    
+                    <label for="email">Your Email:</label>
+                    <input type="email" id="email" required placeholder="example@example.com">
+                    
+                    <label for="seats">Number of Seats:</label>
+                    <input type="number" id="seats" min="1" required>
+                
+                    <label for="phone">Your Phone Number:</label>
+                    <input type="tel" id="phone" required placeholder="123-456-7890">
+                
+                    <label for="card-details">Card Details:</label>
+                    <input type="text" id="card-details" required placeholder="Card Number">
+                
+                    <button type="submit">Book Now</button>
+                </form>
+                
+            </div>
+        </div>
+
+        <div class="movie-card">
+            <img src="D:/ticket-booking-system/img/movies/Screenshot 2025-01-19 114544.png" alt="Movie 3">
+            <h3>Vanangaan</h3>
+            <div class="details" style="display:none;">
+                <img src="D:/ticket-booking-system/img/movies/Screenshot 2025-01-19 114544.png" alt="Movie 3">
+                <h3>Vanangaan</h3>
+                <p>Full description of the movie...</p>
+                <form>
+                    <label for="name">Your Name:</label>
+                    <input type="text" id="name" required>
+                    
+                    <label for="email">Your Email:</label>
+                    <input type="email" id="email" required placeholder="example@example.com">
+                    
+                    <label for="seats">Number of Seats:</label>
+                    <input type="number" id="seats" min="1" required>
+                
+                    <label for="phone">Your Phone Number:</label>
+                    <input type="tel" id="phone" required placeholder="123-456-7890">
+                
+                    <label for="card-details">Card Details:</label>
+                    <input type="text" id="card-details" required placeholder="Card Number">
+                
+                    <button type="submit">Book Now</button>
+                </form>
+                
+            </div>
+        </div>
+
+        <div class="movie-card">
+            <img src="D:/ticket-booking-system/img/movies/Screenshot 2025-01-19 114620.png" alt="Movie 4">
+            <h3>Game Changer</h3>
+            <div class="details" style="display:none;">
+                <img src="D:/ticket-booking-system/img/movies/Screenshot 2025-01-19 114620.png" alt="Movie 4">
+                <h3>Game Changer</h3>
+                <p>Full description of the movie...</p>
+                <form>
+                    <label for="name">Your Name:</label>
+                    <input type="text" id="name" required>
+                    
+                    <label for="email">Your Email:</label>
+                    <input type="email" id="email" required placeholder="example@example.com">
+                    
+                    <label for="seats">Number of Seats:</label>
+                    <input type="number" id="seats" min="1" required>
+                    
+                    <button type="submit">Book Now</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="movie-card">
+            <img src="D:/ticket-booking-system/img/movies/Screenshot 2025-01-19 114628.png" alt="Movie 5">
+            <h3>Mufasa: The Lion King</h3>
+            <div class="details" style="display:none;">
+                <img src="D:/ticket-booking-system/img/movies/Screenshot 2025-01-19 114628.png" alt="Movie 5">
+                <h3>Mufasa: The Lion King</h3>
+                <p>Full description of the movie...</p>
+                <form>
+                    <label for="name">Your Name:</label>
+                    <input type="text" id="name" required>
+                    
+                    <label for="email">Your Email:</label>
+                    <input type="email" id="email" required placeholder="example@example.com">
+                    
+                    <label for="seats">Number of Seats:</label>
+                    <input type="number" id="seats" min="1" required>
+                
+                    <label for="phone">Your Phone Number:</label>
+                    <input type="tel" id="phone" required placeholder="123-456-7890">
+                
+                    <label for="card-details">Card Details:</label>
+                    <input type="text" id="card-details" required placeholder="Card Number">
+                
+                    <button type="submit">Book Now</button>
+                </form>
+                
+            </div>
+        </div>
+
+        <div class="movie-card">
+            <img src="D:/ticket-booking-system/img/movies/Screenshot 2025-01-19 114643.png" alt="Movie 6">
+            <h3>Nesippaya</h3>
+            <div class="details" style="display:none;">
+                <img src="D:/ticket-booking-system/img/movies/Screenshot 2025-01-19 114643.png" alt="Movie 6">
+                <h3>Nesippaya</h3>
+                <p>Full description of the movie...</p>
+                <form>
+                    <label for="name">Your Name:</label>
+                    <input type="text" id="name" required>
+                    
+                    <label for="email">Your Email:</label>
+                    <input type="email" id="email" required placeholder="example@example.com">
+                    
+                    <label for="seats">Number of Seats:</label>
+                    <input type="number" id="seats" min="1" required>
+                    
+                    <button type="submit">Book Now</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="movie-card">
+            <img src="D:/ticket-booking-system/img/movies/Screenshot 2025-01-19 114902.png" alt="Movie 7">
+            <h3>Marco</h3>
+            <div class="details" style="display:none;">
+                <img src="D:/ticket-booking-system/img/movies/Screenshot 2025-01-19 114902.png" alt="Movie 7">
+                <h3>Marco</h3>
+                <p>Full description of the movie...</p>
+                <form>
+                    <label for="name">Your Name:</label>
+                    <input type="text" id="name" required>
+                    
+                    <label for="email">Your Email:</label>
+                    <input type="email" id="email" required placeholder="example@example.com">
+                    
+                    <label for="seats">Number of Seats:</label>
+                    <input type="number" id="seats" min="1" required>
+                    
+                    <button type="submit">Book Now</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="movie-card">
+            <img src="D:/ticket-booking-system/img/movies/Screenshot 2025-01-19 115324.png" alt="Movie 8">
+            <h3>Aghathiya</h3>
+            <div class="details" style="display:none;">
+                <img src="D:/ticket-booking-system/img/movies/Screenshot 2025-01-19 115324.png" alt="Movie 8">
+                <h3>Aghathiya</h3>
+                <p>Full description of the movie...</p>
+                <form>
+                    <label for="name">Your Name:</label>
+                    <input type="text" id="name" required>
+                    
+                    <label for="email">Your Email:</label>
+                    <input type="email" id="email" required placeholder="example@example.com">
+                    
+                    <label for="seats">Number of Seats:</label>
+                    <input type="number" id="seats" min="1" required>
+                    
+                    <button type="submit">Book Now</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="movie-card">
+            <img src="D:/ticket-booking-system/img/movies/Screenshot 2025-01-19 115404.png" alt="Movie 9">
+            <h3>Tharunam</h3>
+            <div class="details" style="display:none;">
+                <img src="D:/ticket-booking-system/img/movies/Screenshot 2025-01-19 115404.png" alt="Movie 9">
+                <h3>Tharunam</h3>
+                <p>Full description of the movie...</p>
+                <form>
+                    <label for="name">Your Name:</label>
+                    <input type="text" id="name" required>
+                    
+                    <label for="email">Your Email:</label>
+                    <input type="email" id="email" required placeholder="example@example.com">
+                    
+                    <label for="seats">Number of Seats:</label>
+                    <input type="number" id="seats" min="1" required>
+                    
+                    <button type="submit">Book Now</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+    <!-- Recommended Events Section -->
+    <section class="recommended-events" id="events">
+        <h2>Events</h2>
+        <div class="event-cards">
+            <!-- Card 1 -->
+            <div class="event-card" data-title="Music Fest 2025">
+                <img src="D:/ticket-booking-system/img/events/Screenshot 2025-01-19 124318.png" alt="Music Fest 2025">
+                <h3>Music Concert</h3>
+                <div class="details" style="display:none;">
+                    <img src="D:/ticket-booking-system/img/events/Screenshot 2025-01-19 124318.png" alt="Music Fest 2025">
+                    <h3>Music Fest 2025</h3>
+                    <p>Join us for an unforgettable night of live music and entertainment!</p>
+                    <form>
+                        <label for="name">Your Name:</label>
+                        <input type="text" id="name" required>
+                        
+                        <label for="email">Your Email:</label>
+                        <input type="email" id="email" required placeholder="example@example.com">
+                        
+                        <label for="seats">Number of Seats:</label>
+                        <input type="number" id="seats" min="1" required>
+                    
+                        <label for="phone">Your Phone Number:</label>
+                        <input type="tel" id="phone" required placeholder="123-456-7890">
+                    
+                        <label for="card-details">Card Details:</label>
+                        <input type="text" id="card-details" required placeholder="Card Number">
+                    
+                        <button type="submit">Book Now</button>
+                    </form>
+                    
+                </div>
+            </div>
+    
+            <!-- Card 2 -->
+            <div class="event-card" data-title="Art Exhibition">
+                <img src="D:/ticket-booking-system/img/events/Screenshot 2025-01-19 124833.png" alt="Art Exhibition">
+                <h3>Ani vibe</h3>
+                <div class="details" style="display:none;">
+                    <img src="D:/ticket-booking-system/img/events/Screenshot 2025-01-19 124833.png" alt="Art Exhibition">
+                    <h3>Art Exhibition</h3>
+                    <p>Explore stunning artwork by talented artists from around the world.</p>
+                    <form>
+                        <label for="name">Your Name:</label>
+                        <input type="text" id="name" required>
+                        
+                        <label for="email">Your Email:</label>
+                        <input type="email" id="email" required placeholder="example@example.com">
+                        
+                        <label for="seats">Number of Seats:</label>
+                        <input type="number" id="seats" min="1" required>
+                        
+                        <button type="submit">Book Now</button>
+                    </form>
+                </div>
+            </div>
+    
+            <!-- Card 3 -->
+            <div class="event-card" data-title="Art Exhibition 2">
+                <img src="D:/ticket-booking-system/img/events/Screenshot 2025-01-19 124732.png" alt="Art Exhibition 2">
+                <h3>Marakuma nenjam</h3>
+                <div class="details" style="display:none;">
+                    <img src="D:/ticket-booking-system/img/events/Screenshot 2025-01-19 124732.png" alt="Art Exhibition 2">
+                    <h3>Art Exhibition 2</h3>
+                    <p>Another immersive experience of beautiful artworks!</p>
+                    <form>
+                        <label for="name">Your Name:</label>
+                        <input type="text" id="name" required>
+                        
+                        <label for="email">Your Email:</label>
+                        <input type="email" id="email" required placeholder="example@example.com">
+                        
+                        <label for="seats">Number of Seats:</label>
+                        <input type="number" id="seats" min="1" required>
+                        
+                        <button type="submit">Book Now</button>
+                    </form>
+                </div>
+            </div>
+    
+            <!-- Card 4 -->
+            <div class="event-card" data-title="Stand-Up Comedy">
+                <img src="D:/ticket-booking-system/img/events/Screenshot 2025-01-19 125130.png" alt="Stand-Up Comedy">
+                <h3>vikkals of vikram</h3>
+                <div class="details" style="display:none;">
+                    <img src="D:/ticket-booking-system/img/events/Screenshot 2025-01-19 125130.png" alt="Stand-Up Comedy">
+                    <h3>Stand-Up Comedy</h3>
+                    <p>Laugh out loud with top comedians performing live!</p>
+                    <form>
+                        <label for="name">Your Name:</label>
+                        <input type="text" id="name" required>
+                        
+                        <label for="email">Your Email:</label>
+                        <input type="email" id="email" required placeholder="example@example.com">
+                        
+                        <label for="seats">Number of Seats:</label>
+                        <input type="number" id="seats" min="1" required>
+                        
+                        <button type="submit">Book Now</button>
+                    </form>
+                </div>
+            </div>
+    
+            <!-- Card 5 -->
+            <div class="event-card" data-title="Tech Conference">
+                <img src="D:/ticket-booking-system/img/events/Screenshot 2025-01-19 124539.png" alt="Tech Conference">
+                <h3>Hip-Hop vibe</h3>
+                <div class="details" style="display:none;">
+                    <img src="D:/ticket-booking-system/img/events/Screenshot 2025-01-19 124539.png" alt="Tech Conference">
+                    <h3>Tech Conference</h3>
+                    <p>Discover the latest trends and innovations in the tech world.</p>
+                    <form>
+                        <label for="name">Your Name:</label>
+                        <input type="text" id="name" required>
+                        
+                        <label for="email">Your Email:</label>
+                        <input type="email" id="email" required placeholder="example@example.com">
+                        
+                        <label for="seats">Number of Seats:</label>
+                        <input type="number" id="seats" min="1" required>
+                        
+                        <button type="submit">Book Now</button>
+                    </form>
+                </div>
+            </div>
+    
+            <!-- Card 6 -->
+            <div class="event-card" data-title="Cooking Workshop">
+                <img src="D:/ticket-booking-system/img/events/Screenshot 2025-01-19 124459.png" alt="Cooking Workshop">
+                <h3>Yuvan concert</h3>
+                <div class="details" style="display:none;">
+                    <img src="D:/ticket-booking-system/img/events/Screenshot 2025-01-19 124459.png" alt="Cooking Workshop">
+                    <h3>Cooking Workshop</h3>
+                    <p>Learn cooking secrets from top chefs in this interactive workshop.</p>
+                    <form>
+                        <label for="name">Your Name:</label>
+                        <input type="text" id="name" required>
+                        
+                        <label for="email">Your Email:</label>
+                        <input type="email" id="email" required placeholder="example@example.com">
+                        
+                        <label for="seats">Number of Seats:</label>
+                        <input type="number" id="seats" min="1" required>
+                        
+                        <button type="submit">Book Now</button>
+                    </form>
+                </div>
+            </div>
+    
+            <!-- Card 7 -->
+            <div class="event-card" data-title="Cooking Workshop 2">
+                <img src="D:/ticket-booking-system/img/events/Screenshot 2025-01-19 130914.png" alt="Cooking Workshop 2">
+                <h3>Ice cream expo</h3>
+                <div class="details" style="display:none;">
+                    <img src="D:/ticket-booking-system/img/events/Screenshot 2025-01-19 130914.png" alt="Cooking Workshop 2">
+                    <h3>Cooking Workshop 2</h3>
+                    <p>Expand your culinary skills with another exclusive workshop.</p>
+                    <form>
+                        <label for="name">Your Name:</label>
+                        <input type="text" id="name" required>
+                        
+                        <label for="email">Your Email:</label>
+                        <input type="email" id="email" required placeholder="example@example.com">
+                        
+                        <label for="seats">Number of Seats:</label>
+                        <input type="number" id="seats" min="1" required>
+                        
+                        <button type="submit">Book Now</button>
+                    </form>
+                </div>
+            </div>
+    
+            <!-- Card 8 -->
+            <div class="event-card" data-title="Cooking Workshop 3">
+                <img src="D:/ticket-booking-system/img/events/Screenshot 2025-01-19 130445.png" alt="Cooking Workshop 3">
+                <h3>Dubai expo</h3>
+                <div class="details" style="display:none;">
+                    <img src="D:/ticket-booking-system/img/events/Screenshot 2025-01-19 130445.png" alt="Cooking Workshop 3">
+                    <h3>Cooking Workshop 3</h3>
+                    <p>Another hands-on experience with world-class chefs.</p>
+                    <form>
+                        <label for="name">Your Name:</label>
+                        <input type="text" id="name" required>
+                        
+                        <label for="email">Your Email:</label>
+                        <input type="email" id="email" required placeholder="example@example.com">
+                        
+                        <label for="seats">Number of Seats:</label>
+                        <input type="number" id="seats" min="1" required>
+                        
+                        <button type="submit">Book Now</button>
+                    </form>
+                </div>
+            </div>
+    
+            <!-- Card 9 -->
+            <div class="event-card" data-title="Cooking Workshop 4">
+                <img src="D:/ticket-booking-system/img/events/Screenshot 2025-01-19 125938.png" alt="Cooking Workshop 4">
+                <h3>standup comedy</h3>
+                <div class="details" style="display:none;">
+                    <img src="D:/ticket-booking-system/img/events/Screenshot 2025-01-19 125938.png" alt="Cooking Workshop 4">
+                    <h3>Cooking Workshop 4</h3>
+                    <p>Perfect your cooking techniques with renowned instructors.</p>
+                    <form>
+                        <label for="name">Your Name:</label>
+                        <input type="text" id="name" required>
+                        
+                        <label for="email">Your Email:</label>
+                        <input type="email" id="email" required placeholder="example@example.com">
+                        
+                        <label for="seats">Number of Seats:</label>
+                        <input type="number" id="seats" min="1" required>
+                        
+                        <button type="submit">Book Now</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Recommended Sports Section -->
+    <!-- Recommended Sports Section -->
+<section class="recommended-sports" id="sports">
+    <h2>Sports</h2>
+    <div class="sports-cards">
+        <div class="sport-card">
+            <img src="D:/ticket-booking-system/img/sports/Screenshot 2025-01-19 135430.png" alt="Sport 7">
+            <h3>Marathon</h3>
+            <div class="details" style="display:none;">
+                <img src="D:/ticket-booking-system/img/sports/Screenshot 2025-01-19 135430.png" alt="Sport 7">
+                <h3>Marathon</h3>
+                <p>Full description of the sport event...</p>
+                <form>
+                    <label for="name">Your Name:</label>
+                    <input type="text" id="name" required>
+                    
+                    <label for="email">Your Email:</label>
+                    <input type="email" id="email" required placeholder="example@example.com">
+                    
+                    <label for="tickets">Number of Tickets:</label>
+                    <input type="number" id="tickets" min="1" required>
+                    
+                    <button type="submit">Book Now</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="sport-card">
+            <img src="D:/ticket-booking-system/img/sports/Screenshot 2025-01-19 135608.png" alt="Sport 8">
+            <h3>Cricket</h3>
+            <div class="details" style="display:none;">
+                <img src="D:/ticket-booking-system/img/sports/Screenshot 2025-01-19 135608.png" alt="Sport 8">
+                <h3>Boxing</h3>
+                <p>Full description of the sport event...</p>
+                <form>
+                    <label for="name">Your Name:</label>
+                    <input type="text" id="name" required>
+                    
+                    <label for="email">Your Email:</label>
+                    <input type="email" id="email" required placeholder="example@example.com">
+                    
+                    <label for="tickets">Number of Tickets:</label>
+                    <input type="number" id="tickets" min="1" required>
+                    
+                    <button type="submit">Book Now</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="sport-card">
+            <img src="D:/ticket-booking-system/img/sports/Screenshot 2025-01-19 135659.png" alt="Sport 9">
+            <h3>Badminton</h3>
+            <div class="details" style="display:none;">
+                <img src="D:/ticket-booking-system/img/sports/Screenshot 2025-01-19 135659.png" alt="Sport 9">
+                <h3>Golf Tournament</h3>
+                <p>Full description of the sport event...</p>
+                <form>
+                    <label for="name">Your Name:</label>
+                    <input type="text" id="name" required>
+                    
+                    <label for="email">Your Email:</label>
+                    <input type="email" id="email" required placeholder="example@example.com">
+                    
+                    <label for="seats">Number of Seats:</label>
+                    <input type="number" id="seats" min="1" required>
+                
+                    <label for="phone">Your Phone Number:</label>
+                    <input type="tel" id="phone" required placeholder="123-456-7890">
+                
+                    <label for="card-details">Card Details:</label>
+                    <input type="text" id="card-details" required placeholder="Card Number">
+                
+                    <button type="submit">Book Now</button>
+                </form>
+                
+            </div>
+        </div>
+
+        <div class="sport-card">
+            <img src="D:/ticket-booking-system/img/sports/Screenshot 2025-01-19 135848.png" alt="Sport 10">
+            <h3>Baseball</h3>
+            <div class="details" style="display:none;">
+                <img src="D:/ticket-booking-system/img/sports/Screenshot 2025-01-19 135848.png" alt="Sport 10">
+                <h3>Basket ball</h3>
+                <p>Full description of the sport event...</p>
+                <form>
+                    <label for="name">Your Name:</label>
+                    <input type="text" id="name" required>
+                    
+                    <label for="email">Your Email:</label>
+                    <input type="email" id="email" required placeholder="example@example.com">
+                    
+                    <label for="tickets">Number of Tickets:</label>
+                    <input type="number" id="tickets" min="1" required>
+                    
+                    <button type="submit">Book Now</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="sport-card">
+            <img src="D:/ticket-booking-system/img/sports/Screenshot 2025-01-19 140343.png" alt="Sport 11">
+            <h3>Kabadi</h3>
+            <div class="details" style="display:none;">
+                <img src="D:/ticket-booking-system/img/sports/Screenshot 2025-01-19 140343.png" alt="Sport 11">
+                <h3>Swimming Championship</h3>
+                <p>Full description of the sport event...</p>
+                <form>
+                    <label for="name">Your Name:</label>
+                    <input type="text" id="name" required>
+                    
+                    <label for="email">Your Email:</label>
+                    <input type="email" id="email" required placeholder="example@example.com">
+                    
+                    <label for="tickets">Number of Tickets:</label>
+                    <input type="number" id="tickets" min="1" required>
+                    
+                    <button type="submit">Book Now</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="sport-card">
+            <img src="D:/ticket-booking-system/img/sports/Screenshot 2025-01-19 140156.png" alt="Sport 12">
+            <h3>Volleyball</h3>
+            <div class="details" style="display:none;">
+                <img src="D:/ticket-booking-system/img/sports/Screenshot 2025-01-19 140156.png" alt="Sport 12">
+                <h3>Ice Hockey</h3>
+                <p>Full description of the sport event...</p>
+                <form>
+                    <label for="name">Your Name:</label>
+                    <input type="text" id="name" required>
+                    
+                    <label for="email">Your Email:</label>
+                    <input type="email" id="email" required placeholder="example@example.com">
+                    
+                    <label for="tickets">Number of Tickets:</label>
+                    <input type="number" id="tickets" min="1" required>
+                    
+                    <button type="submit">Book Now</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="sport-card">
+            <img src="D:/ticket-booking-system/img/sports/Screenshot 2025-01-19 135738.png" alt="Sport 13">
+            <h3>Foot ball</h3>
+            <div class="details" style="display:none;">
+                <img src="D:/ticket-booking-system/img/sports/Screenshot 2025-01-19 135738.png" alt="Sport 13">
+                <h3>Cycling Race</h3>
+                <p>Full description of the sport event...</p>
+                <form>
+                    <label for="name">Your Name:</label>
+                    <input type="text" id="name" required>
+                    
+                    <label for="email">Your Email:</label>
+                    <input type="email" id="email" required placeholder="example@example.com">
+                    
+                    <label for="tickets">Number of Tickets:</label>
+                    <input type="number" id="tickets" min="1" required>
+                    
+                    <button type="submit">Book Now</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+     <!-- Offers Section -->
+     <section class="offers" id="offers">
+    <h2>Exclusive Offers</h2>
+    <div class="offer-cards">
+        <div class="offer-card">
+            <h3>20% Off on Movie Tickets</h3>
+            <p>Book your movie tickets now and get 20% off on select movies.</p>
+        </div>
+        <div class="offer-card">
+            <h3>Buy 1 Get 1 Free on Events</h3>
+            <p>Get a free ticket for every event ticket you purchase. Limited time only!</p>
+        </div>
+        <div class="offer-card">
+            <h3>50% Off on Sports Tickets</h3>
+            <p>Enjoy your favorite sports events with 50% off on all tickets.</p>
+        </div>
+        <div class="offer-card">
+            <h3>Special Discount on Food Orders</h3>
+            <p>Get up to 30% off on your food delivery when you book through our platform.</p>
+        </div>
+    </div>
+</section>
+
+
+    
+<!-- Contact Section --> 
+ <section class="contact" id="contact">
+    <h2>Contact Us</h2>
+    <div class="contact-info">
+        <div class="contact-item">
+            <h3>Email</h3>
+            <p>support@myticketbooker.com</p>
+        </div>
+        <div class="contact-item">
+            <h3>Phone</h3>
+            <p>+1 800 123 4567</p>
+        </div>
+        <div class="contact-item">
+            <h3>Address</h3>
+            <p>123 Ticket Booking Street, City, Country</p>
+        </div>
+    </div>
+    <!-- Contact Form Layout -->
+    <div class="contact-form">
+        <h2>Leave a message</h2>
+        <input type="text" id="name" placeholder="Your Name" required>
+        <input type="email" id="email" placeholder="Your Email" required>
+        <textarea id="message" placeholder="Your Message" required></textarea>
+        <button id="sendButton">Send Message</button>
+    </div>
+
+    <!-- Notification Bar -->
+    <div id="notificationBar">
+        Message Sent!
+    </div>
+
+
+</section>
+
+<script src="D:/ticket-booking-system/front/script.js"></script>
+</body>
+</html>
